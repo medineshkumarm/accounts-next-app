@@ -1,0 +1,22 @@
+[
+  {
+    "id": 1,
+    "Total Revenue": 15000,
+    "percentage": 12
+  },
+  {
+    "id": 2,
+    "This Month Revenue": 23000,
+    "percentage": 12
+  },
+  {
+    "id": 3,
+    "Average Revenue": 15000,
+    "percentage": 78
+  },
+  {
+    "id": 1,
+    "Total Profit": 20000,
+    "percentage": 12
+  }
+]
