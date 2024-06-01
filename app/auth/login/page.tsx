@@ -8,7 +8,7 @@ import React from "react";
 export default function page() {
   return (
     <>
-      <div className="w-full h-screen flex flex-col items-center justify-center gap-4">
+      <div className="w-full h-screen flex flex-col items-center justify-center gap-4 text-center">
         <h2 className="text-3xl font-bold">
           Welcome to Account Management App
         </h2>

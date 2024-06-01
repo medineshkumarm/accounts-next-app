@@ -1,6 +1,7 @@
 "use server";
 
 import { db } from "@/db";
+import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
 
 // export async function createTransaction(formData: FormData) {
 //  "use server";
@@ -39,9 +40,15 @@ import { db } from "@/db";
 //   });
 // }
 import { revalidatePath } from "next/cache";
-import { notFound } from "next/navigation";
+import { notFound, redirect } from "next/navigation";
 
 export async function createTransaction(formData: FormData) {
+  const { isAuthenticated, getUser } = getKindeServerSession();
+
+  if (!(await isAuthenticated())) {
+    redirect("/auth/login");
+  }
+  
   const Fdate = formData.get("date");
   const Famount = formData.get("amount");
   const FpaymentType = formData.get("paymentType");
@@ -177,6 +184,13 @@ export async function editTransaction({ id }: any) {
 }
 
 export async function deleteTransaction(id: string) {
+  const { isAuthenticated, getUser } = getKindeServerSession();
+  const user = await getUser();
+
+  if (!(await isAuthenticated())) {
+    redirect("/auth/login");
+  }
+ 
   const currTransaction = await db.transaction.delete({ where: { id } });
   if (currTransaction == null) return notFound();
   revalidatePath("/admin/dashboard");
